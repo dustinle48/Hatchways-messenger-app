@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@material-ui/core";
-import { BadgeAvatar, ChatContent } from "../Sidebar";
+import { BadgeAvatar, ChatContent, UnreadChip } from "../Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +22,7 @@ const Chat = ({ conversation, setActiveChat }) => {
   const { otherUser } = conversation;
 
   const handleClick = async (conversation) => {
-    await setActiveChat(conversation.otherUser.username);
+    await setActiveChat(conversation.otherUser.username, conversation.id, conversation.otherUser.id);
   };
 
   return (
@@ -34,6 +34,7 @@ const Chat = ({ conversation, setActiveChat }) => {
         sidebar={true}
       />
       <ChatContent conversation={conversation} />
+      <UnreadChip messages={conversation.messages} otherUser={conversation.otherUser} />
     </Box>
   );
 };
