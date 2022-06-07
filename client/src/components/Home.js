@@ -62,9 +62,9 @@ const Home = ({ user, logout }) => {
     });
   };
 
-  const postMessage = async (body) => { // Add async
+  const postMessage = async (body) => {
     try {
-      const data = await saveMessage(body); // Add await
+      const data = await saveMessage(body);
 
       if (!body.conversationId) {
         addNewConvo(body.recipientId, data.message);
@@ -87,7 +87,7 @@ const Home = ({ user, logout }) => {
           convo.id = message.conversationId;
         }
       });
-      setConversations([...conversations]); // change to [...conversations] because array is immutable
+      setConversations(() => [...conversations]);
     },
     [setConversations, conversations]
   );
@@ -112,7 +112,7 @@ const Home = ({ user, logout }) => {
           convo.latestMessageText = message.text;
         }
       });
-      setConversations([...conversations]); // change to [...conversations] because array is immutable
+      setConversations(() => [...conversations]);
     },
     [setConversations, conversations]
   );
