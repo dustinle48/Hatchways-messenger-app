@@ -41,8 +41,7 @@ const SenderBubble = ({ time, text, id, lastReadMessageId, photoUrl }) => {
       <Box className={classes.bubble}>
         <Typography className={classes.text}>{text}</Typography>
       </Box>
-      { id === lastReadMessageId ? <Avatar src={photoUrl} className={classes.avatar} /> : <></> 
-      }
+      { id === lastReadMessageId && <Avatar src={photoUrl} className={classes.avatar} /> }
     </Box>
   );
 };

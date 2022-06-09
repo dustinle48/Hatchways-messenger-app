@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Chat = ({ conversation, setActiveChat }) => {
   const classes = useStyles();
-  const { otherUser } = conversation;
+  const { otherUser, id } = conversation;
 
   const handleClick = async (conversation) => {
-    await setActiveChat(conversation.otherUser.username, conversation.id, conversation.otherUser.id);
+    await setActiveChat(otherUser.username, id, otherUser.id);
   };
 
   return (
