@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@material-ui/core";
-import { BadgeAvatar, ChatContent, UnreadChip } from "../Sidebar";
+import { BadgeAvatar, ChatContent, UnreadBadge } from "../Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +25,18 @@ const Chat = ({ conversation, setActiveChat }) => {
     await setActiveChat(otherUser.username, id, otherUser.id);
   };
 
+  const props = {
+    color: "#9CADC8",
+    fontWeight: "normal",
+    fontSize: "1rem",
+  };
+
+  if (conversation.unreadMessageCount > 0) {
+    props.color = "#000000";
+    props.fontWeight = "bold";
+    props.fontSize = "1.1rem";
+  }
+
   return (
     <Box onClick={() => handleClick(conversation)} className={classes.root}>
       <BadgeAvatar
@@ -33,8 +45,8 @@ const Chat = ({ conversation, setActiveChat }) => {
         online={otherUser.online}
         sidebar={true}
       />
-      <ChatContent conversation={conversation} />
-      <UnreadChip messages={conversation.messages} otherUser={conversation.otherUser} />
+      <ChatContent conversation={conversation} props={props} />
+      <UnreadBadge unreadMessageCount={conversation.unreadMessageCount} />
     </Box>
   );
 };

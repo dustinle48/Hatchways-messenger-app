@@ -4,9 +4,7 @@ import { SenderBubble, OtherUserBubble } from ".";
 import moment from "moment";
 
 const Messages = (props) => {
-  const { messages, otherUser, userId } = props;
-
-  let lastReadMessage = messages.slice().reverse().find((message) => message.senderId === userId && message.readStatus === true)
+  const { messages, otherUser, userId, lastReadMessageId } = props;
 
   return (
     <Box>
@@ -14,7 +12,7 @@ const Messages = (props) => {
         const time = moment(message.createdAt).format("h:mm");
 
         return message.senderId === userId ? (
-          <SenderBubble key={message.id} id={message.id} text={message.text} time={time} lastReadMessageId={lastReadMessage?.id} photoUrl={otherUser.photoUrl} />
+          <SenderBubble key={message.id} id={message.id} text={message.text} time={time} lastReadMessageId={lastReadMessageId} photoUrl={otherUser.photoUrl} />
         ) : (
           <OtherUserBubble
             key={message.id}
