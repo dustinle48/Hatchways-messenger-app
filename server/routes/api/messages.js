@@ -43,4 +43,34 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.put("/read", async (req, res, next) => {
+  try {
+    if (!req.user) {
+      return res.sendStatus(401);
+    }
+    const { conversationId, otherUserId } = req.body;
+
+    let conversation = await Conversation.findConversation(
+      req.user.id,
+      otherUserId,
+    );
+    //Check if requesting user is authorized
+    if (!conversation) {
+      return res.sendStatus(403)
+    }
+
+    if (conversationId) {
+      const message = await Message.update(
+        { readStatus: true },
+        { 
+          where: { senderId: otherUserId, readStatus: false, conversationId: conversationId }
+        }
+      );
+      return res.json({ message, conversationId, otherUserId });
+    }
+  } catch (error) {
+    next(error);
+  }
+})
+
 module.exports = router;

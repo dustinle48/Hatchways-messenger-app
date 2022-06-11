@@ -12,20 +12,22 @@ const useStyles = makeStyles((theme) => ({
   username: {
     fontWeight: "bold",
     letterSpacing: -0.2,
+    fontSize: (props) => props.fontSize,
   },
   previewText: {
     fontSize: 12,
-    color: "#9CADC8",
     letterSpacing: -0.17,
+    color: (props)  => props.color,
+    fontWeight: (props) => props.fontWeight,
   },
 }));
 
-const ChatContent = ({ conversation }) => {
-  const classes = useStyles();
+const ChatContent = ({ conversation, props }) => {
+  const classes = useStyles(props);
 
   const { otherUser } = conversation;
   const latestMessageText = conversation.id && conversation.latestMessageText;
-
+  
   return (
     <Box className={classes.root}>
       <Box>

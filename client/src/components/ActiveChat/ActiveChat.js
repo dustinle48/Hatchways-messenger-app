@@ -49,6 +49,7 @@ const ActiveChat = ({
             {user && (
               <>
                 <Messages
+                  lastReadMessageId={conversation.lastReadMessageId}
                   messages={conversation.messages}
                   otherUser={conversation.otherUser}
                   userId={user.id}
